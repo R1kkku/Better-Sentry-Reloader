@@ -35,48 +35,6 @@
             "size": 16
         },
         {
-            "type": "multiple_choice",
-            "id": "bsr_cost_mode",
-            "title": "bsr_opt_cost_mode_title",
-            "description": "bsr_opt_cost_mode_desc",
-            "callback": "bsr_callback_cost_mode",
-            "value": "cost_mode",
-            "items": [
-                "bsr_cost_mode_perk",
-                "bsr_cost_mode_custom",
-                "bsr_cost_mode_free"
-            ],
-            "default_value": 1
-        },
-        {
-            "type": "slider",
-            "id": "bsr_custom_cost_percent",
-            "title": "bsr_opt_custom_cost_title",
-            "description": "bsr_opt_custom_cost_desc",
-            "callback": "bsr_callback_custom_cost_percent",
-            "value": "custom_cost_percent",
-            "min": 1,
-            "max": 50,
-            "step": 1,
-            "default_value": 20
-        },
-        {
-            "type": "slider",
-            "id": "bsr_cost_multiplier",
-            "title": "bsr_opt_cost_multiplier_title",
-            "description": "bsr_opt_cost_multiplier_desc",
-            "callback": "bsr_callback_cost_multiplier",
-            "value": "cost_multiplier",
-            "min": 10,
-            "max": 200,
-            "step": 10,
-            "default_value": 100
-        },
-        {
-            "type": "divider",
-            "size": 16
-        },
-        {
             "type": "toggle",
             "id": "bsr_allow_team_sentries",
             "title": "bsr_opt_allow_team_sentries_title",

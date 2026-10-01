@@ -11,9 +11,6 @@ BetterSentryReloader.sentries = BetterSentryReloader.sentries or {}
 BetterSentryReloader.settings = {
     target_mode = 1,              -- 1: Aimed (Crosshair), 2: Closest, 3: All in Range
     max_range = 10,               -- In meters (2 to 50)
-    cost_mode = 1,                -- 1: Perk-Based, 2: Custom Percentage, 3: Free
-    custom_cost_percent = 20,     -- In percent (1% to 50%)
-    cost_multiplier = 100,        -- Scale factor in percent (10% to 200%)
     allow_team_sentries = false,  -- Whether to reload teammate sentries too
     repair_health = false,        -- Also repair sentry health when host
     play_sound = true,            -- Play reload sound effect
@@ -220,13 +217,7 @@ function BetterSentryReloader:calculate_ammo_cost(sentry_unit, player_unit)
         return weapon_costs, 0
     end
 
-    local cost_mode = self.settings.cost_mode or 1
-    if cost_mode == 3 then
-        -- Free mode (no ammo cost)
-        return weapon_costs, 0
-    end
-
-    local cost_mult = (self.settings.cost_multiplier or 100) / 100
+    -- Strictly based on game mechanics & skills/perks (Eco Sentry & Third Law):
     local cost_reduction_lvl = managers.player:upgrade_value("sentry_gun", "cost_reduction", 1)
     local dep_cost = (SentryGunBase and SentryGunBase.DEPLOYEMENT_COST and SentryGunBase.DEPLOYEMENT_COST[cost_reduction_lvl]) or 0.70
     local full_cost_fraction = 1.0 - dep_cost -- 0.30 (no perk), 0.25 (basic), 0.20 (aced)
@@ -244,20 +235,14 @@ function BetterSentryReloader:calculate_ammo_cost(sentry_unit, player_unit)
         local max_ammo = base:get_ammo_max()
         local full_bullets = 0
 
-        if cost_mode == 2 then
-            -- Custom percentage mode
-            local custom_pct = (self.settings.custom_cost_percent or 20) / 100
-            full_bullets = max_ammo * custom_pct
+        -- Perk-based cost mirroring vanilla pick up and redeploy
+        if recorded_costs and recorded_costs[index] then
+            full_bullets = recorded_costs[index]
         else
-            -- Perk-based mode (mirrors pick up and redeploy)
-            if recorded_costs and recorded_costs[index] then
-                full_bullets = recorded_costs[index]
-            else
-                full_bullets = max_ammo * full_cost_fraction
-            end
+            full_bullets = max_ammo * full_cost_fraction
         end
 
-        local bullets_needed = math.ceil(full_bullets * missing_ratio * cost_mult)
+        local bullets_needed = math.ceil(full_bullets * missing_ratio)
         if bullets_needed > 0 then
             weapon_costs[index] = bullets_needed
             total_bullets = total_bullets + bullets_needed
@@ -476,17 +461,10 @@ function BetterSentryReloader:reload_sentry()
     -- Player audio and HUD feedback
     self:play_feedback_sound("ammo_pickup")
 
-    local msg
-    if grand_total_bullets > 0 then
-        msg = managers.localization:text("bsr_hint_reloaded_cost", {
-            COUNT = tostring(reloaded_count),
-            BULLETS = tostring(grand_total_bullets)
-        })
-    else
-        msg = managers.localization:text("bsr_hint_reloaded_free", {
-            COUNT = tostring(reloaded_count)
-        })
-    end
+    local msg = managers.localization:text("bsr_hint_reloaded_cost", {
+        COUNT = tostring(reloaded_count),
+        BULLETS = tostring(grand_total_bullets)
+    })
 
     self:notify(msg)
 end

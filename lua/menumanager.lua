@@ -13,21 +13,6 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_BetterSentryReloader",
         BetterSentryReloader:save()
     end
 
-    MenuCallbackHandler.bsr_callback_cost_mode = function(this, item)
-        BetterSentryReloader.settings.cost_mode = item:value()
-        BetterSentryReloader:save()
-    end
-
-    MenuCallbackHandler.bsr_callback_custom_cost_percent = function(this, item)
-        BetterSentryReloader.settings.custom_cost_percent = item:value()
-        BetterSentryReloader:save()
-    end
-
-    MenuCallbackHandler.bsr_callback_cost_multiplier = function(this, item)
-        BetterSentryReloader.settings.cost_multiplier = item:value()
-        BetterSentryReloader:save()
-    end
-
     MenuCallbackHandler.bsr_callback_allow_team_sentries = function(this, item)
         local val = item:value()
         BetterSentryReloader.settings.allow_team_sentries = (val == "on" or val == true or val == "true")
