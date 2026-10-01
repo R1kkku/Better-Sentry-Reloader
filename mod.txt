@@ -1,0 +1,33 @@
+{
+    "name": "Better Sentry Reloader",
+    "description": "Reload your sentry guns with a keybind using your perks and mod options, without having to pick them up and redeploy.",
+    "author": "Antigravity",
+    "contact": "",
+    "version": "1.0.0",
+    "priority": 10,
+    "keybinds": [
+        {
+            "keybind_id": "bsr_reload_sentry",
+            "name": "bsr_keybind_title",
+            "description": "bsr_keybind_desc",
+            "script_path": "lua/keybind.lua",
+            "run_in_menu": false,
+            "run_in_game": true,
+            "localized": true
+        }
+    ],
+    "hooks": [
+        {
+            "hook_id": "lib/managers/menumanager",
+            "script_path": "lua/menumanager.lua"
+        },
+        {
+            "hook_id": "lib/managers/localizationmanager",
+            "script_path": "lua/localizationmanager.lua"
+        },
+        {
+            "hook_id": "lib/units/equipment/sentry_gun/sentrygunbase",
+            "script_path": "lua/sentrygunbase.lua"
+        }
+    ]
+}

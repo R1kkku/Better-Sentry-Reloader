@@ -1,0 +1,116 @@
+{
+    "menu_id": "better_sentry_reloader_options",
+    "parent_menu_id": "blt_options",
+    "title": "bsr_options_title",
+    "description": "bsr_options_desc",
+    "items": [
+        {
+            "type": "multiple_choice",
+            "id": "bsr_target_mode",
+            "title": "bsr_opt_target_mode_title",
+            "description": "bsr_opt_target_mode_desc",
+            "callback": "bsr_callback_target_mode",
+            "value": "target_mode",
+            "items": [
+                "bsr_target_mode_aimed",
+                "bsr_target_mode_closest",
+                "bsr_target_mode_all"
+            ],
+            "default_value": 1
+        },
+        {
+            "type": "slider",
+            "id": "bsr_max_range",
+            "title": "bsr_opt_max_range_title",
+            "description": "bsr_opt_max_range_desc",
+            "callback": "bsr_callback_max_range",
+            "value": "max_range",
+            "min": 2,
+            "max": 50,
+            "step": 1,
+            "default_value": 10
+        },
+        {
+            "type": "divider",
+            "size": 16
+        },
+        {
+            "type": "multiple_choice",
+            "id": "bsr_cost_mode",
+            "title": "bsr_opt_cost_mode_title",
+            "description": "bsr_opt_cost_mode_desc",
+            "callback": "bsr_callback_cost_mode",
+            "value": "cost_mode",
+            "items": [
+                "bsr_cost_mode_perk",
+                "bsr_cost_mode_custom",
+                "bsr_cost_mode_free"
+            ],
+            "default_value": 1
+        },
+        {
+            "type": "slider",
+            "id": "bsr_custom_cost_percent",
+            "title": "bsr_opt_custom_cost_title",
+            "description": "bsr_opt_custom_cost_desc",
+            "callback": "bsr_callback_custom_cost_percent",
+            "value": "custom_cost_percent",
+            "min": 1,
+            "max": 50,
+            "step": 1,
+            "default_value": 20
+        },
+        {
+            "type": "slider",
+            "id": "bsr_cost_multiplier",
+            "title": "bsr_opt_cost_multiplier_title",
+            "description": "bsr_opt_cost_multiplier_desc",
+            "callback": "bsr_callback_cost_multiplier",
+            "value": "cost_multiplier",
+            "min": 10,
+            "max": 200,
+            "step": 10,
+            "default_value": 100
+        },
+        {
+            "type": "divider",
+            "size": 16
+        },
+        {
+            "type": "toggle",
+            "id": "bsr_allow_team_sentries",
+            "title": "bsr_opt_allow_team_sentries_title",
+            "description": "bsr_opt_allow_team_sentries_desc",
+            "callback": "bsr_callback_allow_team_sentries",
+            "value": "allow_team_sentries",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "bsr_repair_health",
+            "title": "bsr_opt_repair_health_title",
+            "description": "bsr_opt_repair_health_desc",
+            "callback": "bsr_callback_repair_health",
+            "value": "repair_health",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "bsr_play_sound",
+            "title": "bsr_opt_play_sound_title",
+            "description": "bsr_opt_play_sound_desc",
+            "callback": "bsr_callback_play_sound",
+            "value": "play_sound",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "bsr_show_hint",
+            "title": "bsr_opt_show_hint_title",
+            "description": "bsr_opt_show_hint_desc",
+            "callback": "bsr_callback_show_hint",
+            "value": "show_hint",
+            "default_value": true
+        }
+    ]
+}

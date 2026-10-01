@@ -1,0 +1,7 @@
+# Save data
+save_settings.json
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
